@@ -1,0 +1,11 @@
+#include <exception>
+namespace GraphicsProject
+{
+    class BadFileException:public exception
+    {
+        virtual char* what() const
+        {
+            return "Inva"
+        }
+    };
+}
