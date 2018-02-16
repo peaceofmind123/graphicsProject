@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
 1518537907 source:c:\users\satan\documents\graphics\graphicsproject\edge.cpp
 
-1518795060 source:c:\users\satan\documents\graphics\graphicsproject\main.cpp
+1518797495 source:c:\users\satan\documents\graphics\graphicsproject\main.cpp
 	"globals.hpp"
 
 1518790374 c:\users\satan\documents\graphics\graphicsproject\globals.hpp
@@ -39,7 +39,7 @@
 1518539872 c:\users\satan\documents\graphics\graphicsproject\surfacenormal.hpp
 	"globals.hpp"
 
-1518790282 c:\users\satan\documents\graphics\graphicsproject\vertexnormal.hpp
+1518798663 c:\users\satan\documents\graphics\graphicsproject\vertexnormal.hpp
 	"globals.hpp"
 
 1518790914 c:\users\satan\documents\graphics\graphicsproject\edge.hpp
@@ -48,7 +48,7 @@
 1518785498 c:\users\satan\documents\graphics\graphicsproject\surface.hpp
 	"globals.hpp"
 
-1518787469 c:\users\satan\documents\graphics\graphicsproject\model.hpp
+1518798047 c:\users\satan\documents\graphics\graphicsproject\model.hpp
 	"globals.hpp"
 
 1518794821 c:\users\satan\documents\graphics\graphicsproject\components.hpp
@@ -67,6 +67,6 @@
 
 1518538044 source:c:\users\satan\documents\graphics\graphicsproject\vertexnormal.cpp
 
-1518796020 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
+1518798914 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
 	"globals.hpp"
 

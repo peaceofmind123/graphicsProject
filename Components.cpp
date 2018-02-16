@@ -146,7 +146,7 @@ VertexNormal* Components::parseNormal(const vector<string>& tokens)
 
 Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
 {
-    Surface* s;
+    Surface* s=new Surface();
     for(int i=1;i<tokens.size();i++) //note: i starts from 1 cuz the first token is f
     {
         string token = tokens.at(i);
@@ -162,6 +162,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
             token=token.substr(slashPos+1);
             slashPos=token.find('/');
         }
+        subTokens.push_back(token);
         int k,l;
         if(subTokens.size()==3)
         {
