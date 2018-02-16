@@ -1,18 +1,20 @@
 #include <exception>
+using namespace std;
 namespace GraphicsProject
 {
-    class BadFileException:public exception
+    class BadFileException: public exception
     {
-        virtual const char* what() const
+        virtual const char* what() const throw()
         {
             return "Invalid file found!!";
         }
     };
+
     class FileNotFoundException: public exception
     {
-        virtual char* what() const
+        virtual const char* what() const t
         {
-            return 
+            return "File not found!!";
         }
     };
-}
+};

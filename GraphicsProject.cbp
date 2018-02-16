@@ -53,6 +53,7 @@
 		<Unit filename="VertexNormal.hpp" />
 		<Unit filename="exceptions.hpp" />
 		<Unit filename="globals.hpp" />
+		<Unit filename="main.cpp" />
 		<Unit filename="setup.py" />
 		<Extensions>
 			<code_completion />

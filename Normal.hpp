@@ -1,4 +1,5 @@
 #include "globals.hpp"
+using namespace std;
 namespace GraphicsProject
 {
     class Normal: public Coord

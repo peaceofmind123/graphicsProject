@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 #include <iostream>
 #include <vector>
 #include <string>
@@ -6,17 +7,20 @@
 #include <fstream>
 #include <exception>
 #include <stdexcept>
-#include "exceptions.h"
+#include "exceptions.hpp"
+#include <cstdlib>
 namespace GraphicsProject{
     class Coord;
     class Edge;
     class Vertex;
     class Normal;
-    class Surface;
+    
     class VertexNormal;
+    class Surface;
     class SurfaceNormal;
     class Model;
     class Components;
+    class BadFileException;
 }
 #include "Coord.hpp"
 #include "Vertex.hpp"
@@ -28,4 +32,4 @@ namespace GraphicsProject{
 #include "Model.hpp"
 #include "Components.hpp"
 
-using namespace std;
+

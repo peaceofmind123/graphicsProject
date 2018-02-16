@@ -10,13 +10,12 @@ namespace GraphicsProject
         Vertex* v2;
         Surface* s1;
         Surface* s2;
-
+        
         Edge()
         {
             v1=nullptr;
             v2=nullptr;
-            s1=nullptr;
-            s2=nullptr;
+            s1=nullptr
         }
     };
 };
