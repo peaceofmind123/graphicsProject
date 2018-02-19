@@ -26,9 +26,36 @@ Model* Components::loadModel(const string& path )
     vector<vector<string> > tokens;
     while(std::getline(fileBuffer,line))
     {
-        lines.push_back(line);
+
+        size_t firstCharPos;
+        size_t lastCharPos;
+
+
+        size_t foundVertex = line.find("v");
+        size_t foundNormal = line.find("vn");
+        size_t foundSurface = line.find("f");
+        bool isFoundVertex = (foundVertex==0);
+        bool isFoundNormal = (foundNormal==0) && (foundVertex!=0);
+        bool isFoundSurface = (foundSurface==0);
+        bool isFound = isFoundVertex || isFoundSurface || isFoundNormal;
+        if(isFound)
+        {
+            do
+            {
+                firstCharPos = line.find_first_not_of(" ");
+                lastCharPos = line.find_last_not_of(" ");
+
+                line = line.substr(firstCharPos);
+                if(!(lastCharPos<line.length()-2))
+                    line=line.substr(0,lastCharPos+1);
+
+            } while(firstCharPos!=0 || lastCharPos!=line.length()-1);
+            lines.push_back(line);
+        }
+
 
     }
+
     for(unsigned i=0;i<lines.size();i++)
     {
         line=lines.at(i);
@@ -73,7 +100,7 @@ Model* Components::loadModel(const string& path )
             }
             else
             {
-                throw BadFileException();
+                continue;
             }
 
     }
@@ -118,7 +145,7 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
     }
     else
     {
-        throw BadFileException();
+
     }
     return v;
 }
@@ -153,7 +180,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
     Surface* s=new Surface();
     for(int i=1;i<tokens.size();i++) //note: i starts from 1 cuz the first token is f
     {
-
+        bool skipMappingFlag=false; //triggered when vertex normal info is not available
         string token = tokens.at(i);
         vector<string> subTokens;
         int numSlashes=0;
@@ -162,7 +189,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
         {
             numSlashes++;
             string subToken = token.substr(0,slashPos);
-            cout<<subToken<<" ";
+
             if(!subToken.empty())
                 subTokens.push_back(subToken);
             token=token.substr(slashPos+1);
@@ -181,25 +208,37 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
             l=std::stoi(subTokens[1]);
 
         }
-        else
+        else if(numSlashes<2) //no vertexnormal info available, so mapping need not be done
+        {
+            skipMappingFlag=true;
+            try
+            {
+                 k = std::stoi(subTokens[0]);
+            }
+            catch(exception& e)
+            {
+                throw BadFileException();
+            }
+        }
+        else //case entered when number of slashes exceeds 2
         {
             throw BadFileException();
         }
         try
         {
             //association between a model's vertices and its vertexnormals (one-to-one) by pointers
-            model->vertices[k-1].normal = &(model->vertexNormals[l-1]);
+                Vertex* v = &(model->vertices[k-1]);
+                if(!skipMappingFlag)
+                {
+                    VertexNormal* vn = &(model->vertexNormals[l-1]);
+                    v->normal = vn;
+                    vn->vertex = v;
+                }//adding the reference of the vertex to the surface, this way, edges can be easily resolved
+                s->vertices.push_back(&(model->vertices[k-1]));
+                
 
-            model->vertexNormals[l-1].vertex = &(model->vertices[k-1]);
-            Vertex v = model->vertices[k-1];
-            
-            VertexNormal vn = model->vertexNormals[l-1];
-    
-            //adding the reference of the vertex to the surface, this way, edges can be easily resolved
-            s->vertices.push_back(&(model->vertices[k-1]));
         }
         catch (exception& e) //this error is caused when the vertex referenced by the face doesn't exist in the file
-
         {
             throw BadFileException();
         }
