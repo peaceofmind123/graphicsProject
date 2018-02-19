@@ -55,6 +55,8 @@ Model* Components::loadModel(const string& path )
 
                 Vertex* v = Components::parseVertex(ts);
                 //todo define parseVertex
+
+
                 model->vertices.push_back(*v);
             }
             else if(ts.at(0)=="vn")
@@ -81,6 +83,7 @@ Model* Components::loadModel(const string& path )
 Vertex* Components::parseVertex(const vector<string>& tokens)
 {
     Vertex* v = new Vertex();
+
     if(tokens.size()==4)
     {
         //xyz coordinates available
@@ -89,6 +92,7 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
             v->x = std::stod(tokens.at(1).c_str());
             v->y = std::stod(tokens.at(2).c_str());
             v->z = std::stod(tokens.at(3).c_str());
+
         }
         catch (exception& e) //this exception can be raised if the string to double conversion cannot occur
         {
@@ -149,6 +153,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
     Surface* s=new Surface();
     for(int i=1;i<tokens.size();i++) //note: i starts from 1 cuz the first token is f
     {
+
         string token = tokens.at(i);
         vector<string> subTokens;
         int numSlashes=0;
@@ -157,6 +162,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
         {
             numSlashes++;
             string subToken = token.substr(0,slashPos);
+            cout<<subToken<<" ";
             if(!subToken.empty())
                 subTokens.push_back(subToken);
             token=token.substr(slashPos+1);
@@ -182,10 +188,12 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
         try
         {
             //association between a model's vertices and its vertexnormals (one-to-one) by pointers
-            model->vertices[k-1].normal = &(model->vertexNormals[l-1]);
 
-            model->vertexNormals[l-1].vertex = &(model->vertices[k-1]);
+            Vertex* v = &(model->vertices[k-1]);
 
+            VertexNormal* vn = &(model->vertexNormals[l-1]);
+            v->normal = vn;
+            vn->vertex = v;
             //adding the reference of the vertex to the surface, this way, edges can be easily resolved
             s->vertices.push_back(&(model->vertices[k-1]));
         }
@@ -194,6 +202,7 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
         {
             throw BadFileException();
         }
-        return s;
+
     }
+    return s;
 }

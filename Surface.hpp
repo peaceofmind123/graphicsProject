@@ -9,5 +9,6 @@ namespace GraphicsProject
         vector<Vertex*> vertices;
         //the vertices of the surface in order
         SurfaceNormal normal;
+
     };
 }
