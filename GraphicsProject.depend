@@ -4,7 +4,7 @@
 1519056942 source:c:\users\satan\documents\graphics\graphicsproject\main.cpp
 	"globals.hpp"
 
-1518790374 c:\users\satan\documents\graphics\graphicsproject\globals.hpp
+1519111277 c:\users\satan\documents\graphics\graphicsproject\globals.hpp
 	<iostream>
 	<vector>
 	<string>
@@ -18,7 +18,6 @@
 	"Vertex.hpp"
 	"Normal.hpp"
 	"SurfaceNormal.hpp"
-	"VertexNormal.hpp"
 	"Edge.hpp"
 	"Surface.hpp"
 	"Model.hpp"
@@ -30,13 +29,13 @@
 1518539872 c:\users\satan\documents\graphics\graphicsproject\coord.hpp
 	"globals.hpp"
 
-1518790310 c:\users\satan\documents\graphics\graphicsproject\vertex.hpp
+1519108924 c:\users\satan\documents\graphics\graphicsproject\vertex.hpp
 	"globals.hpp"
 
-1518785553 c:\users\satan\documents\graphics\graphicsproject\normal.hpp
+1519108983 c:\users\satan\documents\graphics\graphicsproject\normal.hpp
 	"globals.hpp"
 
-1518539872 c:\users\satan\documents\graphics\graphicsproject\surfacenormal.hpp
+1519109104 c:\users\satan\documents\graphics\graphicsproject\surfacenormal.hpp
 	"globals.hpp"
 
 1518798663 c:\users\satan\documents\graphics\graphicsproject\vertexnormal.hpp
@@ -45,13 +44,13 @@
 1518790914 c:\users\satan\documents\graphics\graphicsproject\edge.hpp
 	"globals.hpp"
 
-1519025267 c:\users\satan\documents\graphics\graphicsproject\surface.hpp
+1519109191 c:\users\satan\documents\graphics\graphicsproject\surface.hpp
 	"globals.hpp"
 
-1518798047 c:\users\satan\documents\graphics\graphicsproject\model.hpp
+1519109231 c:\users\satan\documents\graphics\graphicsproject\model.hpp
 	"globals.hpp"
 
-1518794821 c:\users\satan\documents\graphics\graphicsproject\components.hpp
+1519109281 c:\users\satan\documents\graphics\graphicsproject\components.hpp
 	"globals.hpp"
 
 1518540242 source:c:\users\satan\documents\graphics\graphicsproject\model.cpp
@@ -67,6 +66,6 @@
 
 1518538044 source:c:\users\satan\documents\graphics\graphicsproject\vertexnormal.cpp
 
-1519046959 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
+1519111297 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
 	"globals.hpp"
 

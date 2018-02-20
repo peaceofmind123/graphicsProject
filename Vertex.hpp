@@ -8,7 +8,7 @@ namespace GraphicsProject
 
         vector<Edge*> edges;
         vector<Surface*> surfaces;
-        VertexNormal* normal;
+
 
 
     };

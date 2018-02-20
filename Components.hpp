@@ -16,7 +16,7 @@ namespace GraphicsProject
         additionally, it resolves the relationships between vertices, vertexnormals, surfaces and edges**/
 
         static Surface* parseSurface(const vector<string>& tokens, Model* model);
-        static VertexNormal* parseNormal(const vector<string>& tokens);
+
     };
 }
 

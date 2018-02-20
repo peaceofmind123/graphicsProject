@@ -6,13 +6,14 @@ using namespace GraphicsProject;
 int main()
 {
     Model* model = Components::loadModel("1.obj");
-    for(int i =0;i<model->vertices.size();i++)
+    for(int i =0;i<model->surfaces.size();i++)
     {
-            Vertex v=model->vertices.at(i);
-            cout<<v.x<<" "<<v.y<<" "<<v.z<<endl;
-            
-                cout<<v.normal->x<<" "<<v.normal->y<<" "<<v.normal->z<<endl;
-
+        Surface s = model->surfaces.at(i);
+        for(int j =0; j<s.vertices.size();j++)
+        {
+            Vertex v = s.vertices.at(j);
+            cout<<v.x<
+        }
     }
 
     return 0;

@@ -9,6 +9,8 @@ namespace GraphicsProject
         vector<Vertex*> vertices;
         //the vertices of the surface in order
         SurfaceNormal normal;
+        //evaluates the geometric surface normal
+        SurfaceNormal& findNormal();
 
     };
 }

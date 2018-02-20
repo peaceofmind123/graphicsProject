@@ -49,8 +49,6 @@
 		<Unit filename="SurfaceNormal.hpp" />
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.hpp" />
-		<Unit filename="VertexNormal.cpp" />
-		<Unit filename="VertexNormal.hpp" />
 		<Unit filename="exceptions.hpp" />
 		<Unit filename="globals.hpp" />
 		<Unit filename="main.cpp" />

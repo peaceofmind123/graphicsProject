@@ -26,7 +26,7 @@ namespace GraphicsProject{
 #include "Vertex.hpp"
 #include "Normal.hpp"
 #include "SurfaceNormal.hpp"
-#include "VertexNormal.hpp"
+
 #include "Edge.hpp"
 #include "Surface.hpp"
 #include "Model.hpp"

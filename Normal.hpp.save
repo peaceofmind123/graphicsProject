@@ -6,6 +6,6 @@ namespace GraphicsProject
     {
     public:
         bool isNormalized() const;
-        Normal& normalize(); //normalizes the normal
+        void
     };
 }

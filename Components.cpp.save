@@ -32,24 +32,26 @@ Model* Components::loadModel(const string& path )
 
 
         size_t foundVertex = line.find("v");
-        size_t foundNormal = line.find("vn");
+
         size_t foundSurface = line.find("f");
         bool isFoundVertex = (foundVertex==0);
-        bool isFoundNormal = (foundNormal==0) && (foundVertex!=0);
         bool isFoundSurface = (foundSurface==0);
-        bool isFound = isFoundVertex || isFoundSurface || isFoundNormal;
+        bool isFound = isFoundVertex || isFoundSurface;
         if(isFound)
         {
             do
             {
                 firstCharPos = line.find_first_not_of(" ");
-                lastCharPos = line.find_last_not_of(" ");
+
 
                 line = line.substr(firstCharPos);
-                if(!(lastCharPos<line.length()-2))
-                    line=line.substr(0,lastCharPos+1);
+                lastSpacePos = line.find_last_of(" ");
+                if(lastSpacePos==line.length()-1)
+                    line=line.substr(0,lastSpacePos);
+                else
+                    lastSpacePos=string::npos;
 
-            } while(firstCharPos!=0 || lastCharPos!=line.length()-1);
+            } while(!(firstCharPos==0 && lastSpacePos==string::npos));
             lines.push_back(line);
         }
 
@@ -64,7 +66,7 @@ Model* Components::loadModel(const string& path )
         string token;
         while(spacePos!=string::npos)
         {
-             token = line.substr(0,spacePos);
+            token = line.substr(0,spacePos);
             ts.push_back(token);
             line=line.substr(spacePos+1);
             spacePos=line.find(' ');
@@ -86,11 +88,7 @@ Model* Components::loadModel(const string& path )
 
                 model->vertices.push_back(*v);
             }
-            else if(ts.at(0)=="vn")
-            {
-                VertexNormal *vn = Components::parseNormal(ts);
-                model->vertexNormals.push_back(*vn);
-            }
+
             else if (ts.at(0)=="f")
             {
 
@@ -101,6 +99,10 @@ Model* Components::loadModel(const string& path )
             else
             {
                 continue;
+                //we do not evaluate vertexnormals or textures
+                //this is outside the scope of this project
+                //the face normals are evaluated geometrically from
+                //the vertex positions.
             }
 
     }
@@ -145,97 +147,49 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
     }
     else
     {
-
+        throw BadFileException();
     }
     return v;
 }
 
-VertexNormal* Components::parseNormal(const vector<string>& tokens)
-{
-    //parses a line of the file to a vertexnormal object.
-    VertexNormal* vn=new VertexNormal();
-    if(tokens.size()==4)
-    {
-        try
-        {
-                vn->x = std::stod(tokens.at(1));
-                vn->y = std::stod(tokens.at(2));
-                vn->z = std::stod(tokens.at(3));
-        }
-        catch (exception& e)
-        {
-            throw BadFileException();
-        }
 
-    }
-    else
-    {
-            throw BadFileException();
-    }
-    return vn;
-}
 
 Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
 {
     Surface* s=new Surface();
     for(int i=1;i<tokens.size();i++) //note: i starts from 1 cuz the first token is f
     {
-        bool skipMappingFlag=false; //triggered when vertex normal info is not available
+
         string token = tokens.at(i);
-        vector<string> subTokens;
-        int numSlashes=0;
+
+
         int slashPos = token.find('/');
-        while(slashPos!=string::npos)
+        if(!(slashPos==string::npos))
         {
-            numSlashes++;
-            string subToken = token.substr(0,slashPos);
-
-            if(!subToken.empty())
-                subTokens.push_back(subToken);
-            token=token.substr(slashPos+1);
-            slashPos=token.find('/');
+            //here we discard the vt and vn part of the face info
+            token=token.substr(0,slashPos);
         }
-        subTokens.push_back(token);
-        int k,l;
-        if(subTokens.size()==3)
+        else
         {
-            k = std::stoi(subTokens[0]); //1 is omitted cuz we do not need texture coordinates
-            l = std::stoi(subTokens[2]);
+            while(token.at(token.length()-1)==' ') //removing trailing spaces, if any
+                token=token.substr(0,token.length()-1);
         }
-        else if(numSlashes==2) //vertex texture coordinates may not be present at all eg: 1//3
+        int k;
+        try
         {
-            k=std::stoi(subTokens[0]);
-            l=std::stoi(subTokens[1]);
-
+            k=std::stoi(token);
         }
-        else if(numSlashes<2) //no vertexnormal info available, so mapping need not be done
+        catch(exception& e)
         {
-            skipMappingFlag=true;
-            try
-            {
-                 k = std::stoi(subTokens[0]);
-            }
-            catch(exception& e)
-            {
-                throw BadFileException();
-            }
-        }
-        else //case entered when number of slashes exceeds 2
-        {
-            throw BadFileException();
+            
         }
         try
         {
             //association between a model's vertices and its vertexnormals (one-to-one) by pointers
                 Vertex* v = &(model->vertices[k-1]);
-                if(!skipMappingFlag)
-                {
-                    VertexNormal* vn = &(model->vertexNormals[l-1]);
-                    v->normal = vn;
-                    vn->vertex = v;
-                }//adding the reference of the vertex to the surface, this way, edges can be easily resolved
-                s->vertices.push_back(&(model->vertices[k-1]));
-                
+            //adding the reference of the vertex to the surface, this way, edges can be easily resolved
+                s->vertices.push_back(v);
+
 
         }
         catch (exception& e) //this error is caused when the vertex referenced by the face doesn't exist in the file
