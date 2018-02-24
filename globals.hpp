@@ -9,6 +9,8 @@ using namespace std;
 #include <stdexcept>
 #include "exceptions.hpp"
 #include <cstdlib>
+#include <cmath>
+#include "glm/glm.hpp"
 namespace GraphicsProject{
     class Coord;
     class Edge;
@@ -21,6 +23,9 @@ namespace GraphicsProject{
     class Model;
     class Components;
     class BadFileException;
+
+    class Camera;
+    class Matrix;
 }
 #include "Coord.hpp"
 #include "Vertex.hpp"
@@ -31,5 +36,5 @@ namespace GraphicsProject{
 #include "Surface.hpp"
 #include "Model.hpp"
 #include "Components.hpp"
-#include "glm/glm.hpp"
+
 

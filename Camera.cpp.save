@@ -1,0 +1,15 @@
+#include "globals.hpp"
+using namespace GraphicsProject;
+using namespace std;
+
+Camera& Camera::lookAt(const Coord& point)
+{
+        viewDir = point-position;
+        viewDir.normalize();
+        return *this;
+}
+
+Matrix getViewMatrix()
+{
+    
+}

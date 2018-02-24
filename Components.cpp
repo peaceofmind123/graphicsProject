@@ -31,9 +31,9 @@ Model* Components::loadModel(const string& path )
         size_t lastSpacePos;
 
 
-        size_t foundVertex = line.find("v");
+        size_t foundVertex = line.find_first_of('v');
 
-        size_t foundSurface = line.find("f");
+        size_t foundSurface = line.find_first_of('f');
         bool isFoundVertex = (foundVertex==0);
         bool isFoundSurface = (foundSurface==0);
         bool isFound = isFoundVertex || isFoundSurface;
@@ -67,7 +67,8 @@ Model* Components::loadModel(const string& path )
         while(spacePos!=string::npos)
         {
             token = line.substr(0,spacePos);
-            ts.push_back(token);
+            if(!token.empty())
+                ts.push_back(token);
             line=line.substr(spacePos+1);
             spacePos=line.find(' ');
         }
@@ -125,6 +126,7 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
         }
         catch (exception& e) //this exception can be raised if the string to double conversion cannot occur
         {
+            cout<<tokens.at(1)<<tokens.at(2)<<tokens.at(3)<<endl;
             throw BadFileException();
         }
 
@@ -141,6 +143,7 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
         }
         catch (exception& e)
         {
+
             throw BadFileException();
 
         }
@@ -149,6 +152,10 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
     {
         throw BadFileException();
     }
+
+
+
+
     return v;
 }
 

@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
 1518537907 source:c:\users\satan\documents\graphics\graphicsproject\edge.cpp
 
-1519111565 source:c:\users\satan\documents\graphics\graphicsproject\main.cpp
+1519455248 source:c:\users\satan\documents\graphics\graphicsproject\main.cpp
 	"globals.hpp"
+	<graphics.h>
 
-1519113079 c:\users\satan\documents\graphics\graphicsproject\globals.hpp
+1519131009 c:\users\satan\documents\graphics\graphicsproject\globals.hpp
 	<iostream>
 	<vector>
 	<string>
@@ -14,6 +15,8 @@
 	<stdexcept>
 	"exceptions.hpp"
 	<cstdlib>
+	<cmath>
+	"glm/glm.hpp"
 	"Coord.hpp"
 	"Vertex.hpp"
 	"Normal.hpp"
@@ -22,12 +25,11 @@
 	"Surface.hpp"
 	"Model.hpp"
 	"Components.hpp"
-	"glm/glm.hpp"
 
 1518785669 c:\users\satan\documents\graphics\graphicsproject\exceptions.hpp
 	<exception>
 
-1518539872 c:\users\satan\documents\graphics\graphicsproject\coord.hpp
+1519131123 c:\users\satan\documents\graphics\graphicsproject\coord.hpp
 	"globals.hpp"
 
 1519108924 c:\users\satan\documents\graphics\graphicsproject\vertex.hpp
@@ -67,7 +69,7 @@
 
 1518538044 source:c:\users\satan\documents\graphics\graphicsproject\vertexnormal.cpp
 
-1519111297 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
+1519454564 source:c:\users\satan\documents\graphics\graphicsproject\components.cpp
 	"globals.hpp"
 
 1519113017 c:\users\satan\documents\graphics\graphicsproject\glm\glm.hpp
@@ -513,4 +515,18 @@
 	"../simd/integer.h"
 
 1519113021 c:\users\satan\documents\graphics\graphicsproject\glm\simd\integer.h
+
+1519449985 source:c:\users\satan\documents\graphics\graphicsproject\camera.cpp
+	"globals.hpp"
+
+1412400678 c:\users\satan\documents\graphics\graphicsproject\extra\graphics.h
+	<windows.h>
+	<limits.h>
+	<sstream>
+
+1519129361 source:c:\users\satan\documents\graphics\graphicsproject\matrix.cpp
+	"globals.hpp"
+
+1519449999 source:c:\users\satan\documents\graphics\graphicsproject\coord.cpp
+	"globals.hpp"
 

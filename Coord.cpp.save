@@ -1,0 +1,24 @@
+#include "globals.hpp"
+
+using namespace GraphicsProject;
+using namespace std;
+
+Coord Coord::operator + (const Coord& point)
+{
+    return Coord(x+point.x,y+point.y,z+point.z,1);
+}
+
+Coord Coord::operator - (const Coord& point)
+{
+    return Coord(x-point.x,y-point.y,z-point.z,1);
+}
+
+Coord& Coord::normalize()
+{
+    double magnitude = sqrt()
+}
+
+Coord Coord::crossProduct(const Coord& b)
+{
+
+}

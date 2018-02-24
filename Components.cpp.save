@@ -28,7 +28,7 @@ Model* Components::loadModel(const string& path )
     {
 
         size_t firstCharPos;
-        size_t lastCharPos;
+        size_t lastSpacePos;
 
 
         size_t foundVertex = line.find("v");
@@ -78,7 +78,14 @@ Model* Components::loadModel(const string& path )
     for(unsigned i=0;i<tokens.size();i++)
     {
         vector<string> ts = tokens.at(i);
-
+        for(int j=0;j<ts.size();j++)
+        {
+            string token = ts[j];
+            int firstCharPos = token.find_first_not_of(" ");
+            if(!(firstCharPos==string::npos))
+                token=token.substr(firstCharPos);
+            ts[j]=token;
+        }
             if(ts.at(0)=="v")
             {
 
@@ -125,6 +132,7 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
         }
         catch (exception& e) //this exception can be raised if the string to double conversion cannot occur
         {
+            cout<<tokens.at(1)<<tokens.at(2)<<tokens.at(3)<<endl;
             throw BadFileException();
         }
 
@@ -141,12 +149,38 @@ Vertex* Components::parseVertex(const vector<string>& tokens)
         }
         catch (exception& e)
         {
+
             throw BadFileException();
 
         }
     }
-    else
+    else if(tokens.size()>4)
     {
+        string validTokens[4];
+        int count=0;
+        for(int i = 0;i<tokens.size();i++)
+        {
+            string token = tokens[i];
+            if(!token.empty())
+            {
+                validTokens[count++]=token;
+
+            }
+            if(count<3)
+                throw BadFileException();
+            if(count==3)
+            {
+                v->x = std::stod(tokens.at(1));
+                v->y= std::stod(tokens.at(2));
+                v->z = 0; //default value
+            }
+            else if(count==4)
+            {
+                
+            }
+            
+        }
+
         throw BadFileException();
     }
     return v;
@@ -179,9 +213,9 @@ Surface* Components::parseSurface(const vector<string>& tokens,Model* model)
         {
             k=std::stoi(token);
         }
-        catch(exception& e)
+        catch(exception& e) //raised when face info contains invalid characters
         {
-            
+            throw BadFileException();
         }
         try
         {

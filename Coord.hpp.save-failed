@@ -4,11 +4,11 @@ namespace GraphicsProject
 {
 
 
-    class Coord
+    class Coord: glm::vec4
     {
     public:
-        double x,y,z,h;
-        explicit Coord(double x=0,double y=0, double z=0, double h=1):x(x),y(y),z(z),h(h)
+
+        explicit Coord(double x=0,double y=0, double z=0, double w=1):x(x),y(y),z(z),w(w)
         {}
         Coord operator - (const Coord& point);
         Coord operator + (const Coord& point);
