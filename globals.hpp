@@ -10,7 +10,7 @@ using namespace std;
 #include "exceptions.hpp"
 #include <cstdlib>
 #include <cmath>
-#include "glm/glm.hpp"
+#include "Eigen/Dense"
 namespace GraphicsProject{
     class Coord;
     class Edge;
@@ -36,5 +36,6 @@ namespace GraphicsProject{
 #include "Surface.hpp"
 #include "Model.hpp"
 #include "Components.hpp"
+#include "Matrix.hpp"
 
 

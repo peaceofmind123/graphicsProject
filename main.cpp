@@ -5,51 +5,26 @@ using namespace GraphicsProject;
 
 int main()
 {
-    int gd=DETECT, gm;
-    Model* model = Components::loadModel("pandamale.obj");
-    initwindow(640,480);
-    double xMax=-1000,yMax=-1000,xMin=4000,yMin=4000,xVal,yVal;
-    for(int i=0;i<model->vertices.size();i++)
+
+    Matrix a(5,5),b(5,5),c(5,5);
+
+    for(int i =0;i<a.getRows();i++)
     {
-
-            Vertex v = model->vertices[i];
-
-            xVal = v.x;
-            yVal = v.y;
-
-            if(xVal>xMax)
-                xMax=xVal;
-            if(xVal<xMin)
-                xMin=xVal;
-            if(yVal>yMax)
-                yMax=yVal;
-            if(yVal<yMin)
-                yMin=yVal;
-        }
-
-
-
-    double xScale = 640/(xMax-xMin);
-    double yScale = 480/(yMax-yMin);
-    double x1Val,x2Val,y1Val,y2Val;
-    for(int i=0;i<model->surfaces.size();i++)
-    {
-        Surface s = model->surfaces[i];
-        for(int j =1;j<s.vertices.size();j++)
+        for(int j=0;j<a.getCols();j++)
         {
-            Vertex* v1 = (s.vertices[j-1]);
-            Vertex* v2 = (s.vertices[j]);
-            x1Val = (v1->x-xMin)*xScale;
-            x2Val = (v2->x-xMin)*xScale;
-            y1Val = (v1->y-yMin)*yScale;
-            y2Val = (v2->y-yMin)*yScale;
-            line(x1Val,y1Val,x2Val,y2Val);
+            *(a.at(i,j))=i+j;
+            *(b.at(i,j))=i-j;
         }
-
-
     }
-    getch();
-    closegraph();
-    return 0;
+    c=a*b;
+    for(int i=0;i<c.getRows();i++)
+    {
+        for(int j=0;j<c.getCols();j++)
+        {
+            cout<<*(c.at(i,j))<<" ";
 
+        }
+        cout<<endl;
+    }
+    return 0;
 }

@@ -4,6 +4,7 @@ namespace GraphicsProject
 {
     class BadFileException: public exception
     {
+
         virtual const char* what() const throw()
         {
             return "Invalid file found!!";
@@ -12,9 +13,31 @@ namespace GraphicsProject
 
     class FileNotFoundException: public exception
     {
-        virtual const char* what() const t
+        virtual const char* what() const throw()
         {
             return "File not found!!";
+        }
+    };
+    class MatrixDimException: public exception
+    {
+        string message;
+        MatrixDimException(string s = "Matrix dimension error!!"):exception()
+        {
+            message = s;
+        }
+        virtual const char* what() const throw()
+        {
+            return message;
+        }
+    };
+    class MatrixMultiplicationException: public exception
+    {
+        string message;
+        MatrixMultiplicationException(string s="Cannot mu"):exception()
+        
+        virtual const char* what() const throw()
+        {
+            return "Cannot multiply the given matrices!!";
         }
     };
 };
